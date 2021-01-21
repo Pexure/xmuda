@@ -6,15 +6,15 @@ DATASET_SOURCE:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_day",)
   NuScenesSCN:
-    preprocess_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess/preprocess"
-    nuscenes_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess"  # only front cam images are needed
+    preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
 DATASET_TARGET:
   TYPE: "NuScenesSCN"
   VAL: ("val_night",)
   TEST: ("test_night",)
   NuScenesSCN:
-    preprocess_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess/preprocess"
-    nuscenes_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess"  # only front cam images are needed
+    preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
 DATALOADER:
   NUM_WORKERS: 4
 OPTIMIZER:
@@ -34,4 +34,5 @@ TRAIN:
 VAL:
   BATCH_SIZE: 32
   PERIOD: 5000
+OUTPUT_DIR: "./checkpoints/aug/baseline/day_night"
 #OUTPUT_DIR: "path/to/output/directory/@"  #  @ will be replaced with config path, e.g. nuscenes/usa_singapore/xmuda
