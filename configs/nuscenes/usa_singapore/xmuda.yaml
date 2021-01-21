@@ -9,7 +9,7 @@ DATASET_SOURCE:
   TRAIN: ("train_usa",)
   NuScenesSCN:
     preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
-    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
 DATASET_TARGET:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_singapore",)
@@ -17,7 +17,7 @@ DATASET_TARGET:
   TEST: ("test_singapore",)
   NuScenesSCN:
     preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
-    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
 DATALOADER:
   NUM_WORKERS: 4
 OPTIMIZER:

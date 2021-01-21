@@ -8,16 +8,16 @@ DATASET_SOURCE:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_day",)
   NuScenesSCN:
-    preprocess_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess/preprocess"
-    nuscenes_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess"  # only front cam images are needed
+    preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
 DATASET_TARGET:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_night",)
   VAL: ("val_night",)
   TEST: ("test_night",)
   NuScenesSCN:
-    preprocess_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess/preprocess"
-    nuscenes_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess"  # only front cam images are needed
+    preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
 DATALOADER:
   NUM_WORKERS: 4
 OPTIMIZER:
