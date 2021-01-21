@@ -34,8 +34,5 @@ TRAIN:
 VAL:
   BATCH_SIZE: 32
   PERIOD: 5000
-<<<<<<< HEAD
 OUTPUT_DIR: "./checkpoints/aug/baseline/usa_singapore"
-=======
-OUTPUT_DIR: "./checkpoints/aug/baseline/usa_singapore"
->>>>>>> 6f5da29ab0f552429f77ad1634c0299552223ec7
+
