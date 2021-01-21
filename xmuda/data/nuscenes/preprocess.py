@@ -104,11 +104,6 @@ def preprocess(nusc, split_names, root_dir, out_dir,
         seg_labels = np.fromfile(lidarseg_path, dtype=np.uint8).astype(np.int64)
         assert len(seg_labels) == pts.shape[1]
         # print(min(seg_labels), max(seg_labels)) # [0, 31]
-        not_appear = []
-        for i in range(32):
-            if i not in seg_labels:
-                not_appear.append(i)
-        print(not_appear)
         classmap = [10] * 32
         idxmap = [[2, 5], [3, 5], [4, 5], [6, 5], [9, 9], [12, 8], [14, 7], [15, 2], [16, 2], [17, 0], [18, 4], [21, 6],
                   [22, 3], [23, 1]]
@@ -166,7 +161,7 @@ if __name__ == '__main__':
     # We construct the splits by using the meta data of NuScenes:
     # USA/Singapore: We check if the location is Boston or Singapore.
     # Day/Night: We detect if "night" occurs in the scene description string.
-    preprocess(nusc, ['train', 'test'], root_dir, out_dir, location='boston', subset_name='usa')
-    # preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, location='singapore', subset_name='singapore')
-    # preprocess(nusc, ['train', 'test'], root_dir, out_dir, keyword='night', keyword_action='exclude', subset_name='day')
-    # preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, keyword='night', keyword_action='filter', subset_name='night')
+    # preprocess(nusc, ['train', 'test'], root_dir, out_dir, location='boston', subset_name='usa')
+    preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, location='singapore', subset_name='singapore')
+    preprocess(nusc, ['train', 'test'], root_dir, out_dir, keyword='night', keyword_action='exclude', subset_name='day')
+    preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, keyword='night', keyword_action='filter', subset_name='night')
