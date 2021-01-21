@@ -3,6 +3,8 @@ __pycache__
 _ext
 *.pyc
 *.so
+*.swp
+checkpoints/
 build/
 dist/
 *.egg-info/

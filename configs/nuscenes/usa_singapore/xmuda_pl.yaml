@@ -8,16 +8,16 @@ DATASET_SOURCE:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_usa",)
   NuScenesSCN:
-    preprocess_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess/preprocess"
-    nuscenes_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess"  # only front cam images are needed
+    preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
 DATASET_TARGET:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_singapore",)
   VAL: ("val_singapore",)
   TEST: ("test_singapore",)
   NuScenesSCN:
-    preprocess_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess/preprocess"
-    nuscenes_dir: "/datasets_local/datasets_mjaritz/nuscenes_preprocess"  # only front cam images are needed
+    preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
     pselab_paths: ("/home/docker_user/workspace/outputs/xmuda/nuscenes/usa_singapore/xmuda/pselab_data/train_singapore.npy",)
 DATALOADER:
   NUM_WORKERS: 4

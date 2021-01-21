@@ -7,14 +7,22 @@ DATASET_SOURCE:
   TRAIN: ("train_day",)
   NuScenesSCN:
     preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+<<<<<<< HEAD
     nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+=======
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
+>>>>>>> 6f5da29ab0f552429f77ad1634c0299552223ec7
 DATASET_TARGET:
   TYPE: "NuScenesSCN"
   VAL: ("val_night",)
   TEST: ("test_night",)
   NuScenesSCN:
     preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+<<<<<<< HEAD
     nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
+=======
+    nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
+>>>>>>> 6f5da29ab0f552429f77ad1634c0299552223ec7
 DATALOADER:
   NUM_WORKERS: 4
 OPTIMIZER:
@@ -35,4 +43,8 @@ VAL:
   BATCH_SIZE: 32
   PERIOD: 5000
 OUTPUT_DIR: "./checkpoints/aug/baseline/day_night"
+<<<<<<< HEAD
 #OUTPUT_DIR: "path/to/output/directory/@"  #  @ will be replaced with config path, e.g. nuscenes/usa_singapore/xmuda
+=======
+#OUTPUT_DIR: "path/to/output/directory/@"  #  @ will be replaced with config path, e.g. nuscenes/usa_singapore/xmuda
+>>>>>>> 6f5da29ab0f552429f77ad1634c0299552223ec7
