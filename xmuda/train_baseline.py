@@ -188,7 +188,9 @@ def train(cfg, output_dir='', run_name=''):
         loss_2d = seg_loss_src_2d
         loss_3d = seg_loss_src_3d
 
+        print(cfg.TRAIN.XMUDA.lambda_xm_src)
         if cfg.TRAIN.XMUDA.lambda_xm_src > 0:
+            print('kksp')
             # cross-modal loss: KL divergence
             seg_logit_2d = preds_2d['seg_logit2'] if cfg.MODEL_2D.DUAL_HEAD else preds_2d['seg_logit']
             seg_logit_3d = preds_3d['seg_logit2'] if cfg.MODEL_3D.DUAL_HEAD else preds_3d['seg_logit']
@@ -202,6 +204,7 @@ def train(cfg, output_dir='', run_name=''):
                                        xm_loss_src_3d=xm_loss_src_3d)
             loss_2d += cfg.TRAIN.XMUDA.lambda_xm_src * xm_loss_src_2d
             loss_3d += cfg.TRAIN.XMUDA.lambda_xm_src * xm_loss_src_3d
+        exit(0)
 
         # update metric (e.g. IoU)
         with torch.no_grad():
