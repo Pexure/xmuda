@@ -103,14 +103,19 @@ def preprocess(nusc, split_names, root_dir, out_dir,
         lidarseg_path = os.path.join(nusc.dataroot, lidarseg['filename'])
         seg_labels = np.fromfile(lidarseg_path, dtype=np.uint8).astype(np.int64)
         assert len(seg_labels) == pts.shape[1]
-        print(min(seg_labels), max(seg_labels))
+        # print(min(seg_labels), max(seg_labels)) # [0, 31]
+        not_appear = []
+        for i in range(32):
+            if i not in seg_labels:
+                not_appear.append(i)
+        print(not_appear)
         classmap = [10] * 32
         idxmap = [[2, 5], [3, 5], [4, 5], [6, 5], [9, 9], [12, 8], [14, 7], [15, 2], [16, 2], [17, 0], [18, 4], [21, 6],
                   [22, 3], [23, 1]]
         for k, v in idxmap:
             classmap[k] = v
         for i in range(len(seg_labels)):
-            seg_labels[i] = self.classmap[seg_labels[i]]
+            seg_labels[i] = classmap[seg_labels[i]]
 
         # map point cloud into front camera image
         pts_valid_flag, pts_cam_coord, pts_img = map_pointcloud_to_image(pts, (900, 1600, 3), calib_infos)
