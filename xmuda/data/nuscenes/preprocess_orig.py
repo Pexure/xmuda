@@ -98,20 +98,6 @@ def preprocess(nusc, split_names, root_dir, out_dir,
         # load lidar points
         pts = np.fromfile(lidar_path, dtype=np.float32, count=-1).reshape([-1, 5])[:, :3].T
 
-        # load seg_labels
-        lidarseg = nusc.get('lidarseg', lidar_token)
-        lidarseg_path = os.path.join(nusc.dataroot, lidarseg['filename'])
-        seg_labels = np.fromfile(lidarseg_path, dtype=np.uint8).astype(np.int64)
-        assert len(seg_labels) == pts.shape[1]
-        print(min(seg_labels), max(seg_labels))
-        classmap = [10] * 32
-        idxmap = [[2, 5], [3, 5], [4, 5], [6, 5], [9, 9], [12, 8], [14, 7], [15, 2], [16, 2], [17, 0], [18, 4], [21, 6],
-                  [22, 3], [23, 1]]
-        for k, v in idxmap:
-            classmap[k] = v
-        for i in range(len(seg_labels)):
-            seg_labels[i] = self.classmap[seg_labels[i]]
-
         # map point cloud into front camera image
         pts_valid_flag, pts_cam_coord, pts_img = map_pointcloud_to_image(pts, (900, 1600, 3), calib_infos)
         # fliplr so that indexing is row, col and not col, row
@@ -119,7 +105,18 @@ def preprocess(nusc, split_names, root_dir, out_dir,
 
         # only use lidar points in the front camera image
         pts = pts[:, pts_valid_flag]
-        seg_labels = seg_labels[pts_valid_flag]
+
+        num_pts = pts.shape[1]
+        seg_labels = np.full(num_pts, fill_value=len(class_names_to_id), dtype=np.uint8)
+        # only use boxes that are visible in camera
+        valid_box_tokens = [box.token for box in boxes_front_cam]
+        boxes = [box for box in boxes_lidar if box.token in valid_box_tokens]
+        for box in boxes:
+            # get points that lie inside of the box
+            fg_mask = points_in_box(box, pts)
+            det_class = category_to_detection_name(box.name)
+            if det_class is not None:
+                seg_labels[fg_mask] = class_names_to_id[det_class]
 
         # convert to relative path
         lidar_path = lidar_path.replace(root_dir + '/', '')
@@ -143,7 +140,7 @@ def preprocess(nusc, split_names, root_dir, out_dir,
         pkl_dict[curr_split].append(data_dict)
 
     # save to pickle file
-    save_dir = osp.join(out_dir, 'xmuda_lidarseg_preprocess')
+    save_dir = osp.join(out_dir, 'preprocess')
     os.makedirs(save_dir, exist_ok=True)
     for split_name in split_names:
         save_path = osp.join(save_dir, '{}{}.pkl'.format(split_name, '_' + subset_name if subset_name else ''))
@@ -153,8 +150,8 @@ def preprocess(nusc, split_names, root_dir, out_dir,
 
 
 if __name__ == '__main__':
-    root_dir = '/home/xyyue/xiangyu/nuscenes_unzip'
-    out_dir = '/home/xyyue/xiangyu/nuscenes_unzip'
+    root_dir = '/datasets_master/nuscenes'
+    out_dir = '/datasets_local/datasets_mjaritz/nuscenes_preprocess'
     nusc = NuScenes(version='v1.0-trainval', dataroot=root_dir, verbose=True)
     # for faster debugging, the script can be run using the mini dataset
     # nusc = NuScenes(version='v1.0-mini', dataroot=root_dir, verbose=True)
@@ -162,6 +159,6 @@ if __name__ == '__main__':
     # USA/Singapore: We check if the location is Boston or Singapore.
     # Day/Night: We detect if "night" occurs in the scene description string.
     preprocess(nusc, ['train', 'test'], root_dir, out_dir, location='boston', subset_name='usa')
-    # preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, location='singapore', subset_name='singapore')
-    # preprocess(nusc, ['train', 'test'], root_dir, out_dir, keyword='night', keyword_action='exclude', subset_name='day')
-    # preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, keyword='night', keyword_action='filter', subset_name='night')
+    preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, location='singapore', subset_name='singapore')
+    preprocess(nusc, ['train', 'test'], root_dir, out_dir, keyword='night', keyword_action='exclude', subset_name='day')
+    preprocess(nusc, ['train', 'val', 'test'], root_dir, out_dir, keyword='night', keyword_action='filter', subset_name='night')
