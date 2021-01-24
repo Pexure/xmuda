@@ -1,8 +1,9 @@
 from xmuda.data.nuscenes.nuscenes_dataloader import NuScenesSCN
+import numpy as np
 
 preprocess_dir = "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
 nuscenes_dir = "/home/xyyue/xiangyu/nuscenes_unzip"
-split = ('test_night',)
+split = ('train_day',)
 # pselab_paths = ('/home/docker_user/workspace/outputs/xmuda/nuscenes/day_night/xmuda/pselab_data/train_night.npy',)
 dataset = NuScenesSCN(split=split,
                       preprocess_dir=preprocess_dir,
