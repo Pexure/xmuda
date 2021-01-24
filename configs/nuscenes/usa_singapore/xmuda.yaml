@@ -40,4 +40,4 @@ TRAIN:
 VAL:
   BATCH_SIZE: 32
   PERIOD: 5000
-OUTPUT_DIR: "./checkpoints/aug/xmuda"
+OUTPUT_DIR: "./checkpoints/aug/xmuda/usa_singapore"
