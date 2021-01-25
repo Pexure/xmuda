@@ -5,6 +5,7 @@ _ext
 *.so
 *.swp
 checkpoints/
+tmp/
 build/
 dist/
 *.egg-info/
