@@ -5,6 +5,7 @@ MODEL_3D:
 DATASET_SOURCE:
   TYPE: "NuScenesSCN"
   TRAIN: ("train_usa",)
+  TEST: ("test_usa",)
   NuScenesSCN:
     preprocess_dir: "/home/xyyue/xiangyu/nuscenes_unzip/xmuda_lidarseg_preprocess"
     nuscenes_dir: "/home/xyyue/xiangyu/nuscenes_unzip"
